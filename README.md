@@ -6,7 +6,7 @@ It can be useful to find parts of a city that you never visited and visualize yo
 
 ![Heatmap of locations in Berlin](locations_in_berlin_all_time_weighted.png)
 
-![Animated Berlin locations heatmap](berlin.webm)
+Click here to see the ![animated version](berlin.webm)
 
 
 ## Usage
@@ -22,5 +22,9 @@ Then, create a virtualenv, install the dependencies and run the script like this
 
 You can use `python3 process.py --help` to get a description, but in short the numbers you see are the decimal coordinates multiplied by 10^7, the zoom level (1000 = 1 pixel per 10 meters).
 
-It will create a global heatmap and one for every 15 minutes span after midnight. These images are then merged in an animated GIF and a webm video.
+It will create a global heatmap and one for every 15 minutes span after midnight. These images are then merged in an animated GIF and a webm video using the amazing [MoviePy](http://zulko.github.io/moviepy/) library.
 
+## License
+MIT licensed, use as you wish.
+
+Made with ❤️ with Python and open source libraries.
