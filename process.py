@@ -97,7 +97,7 @@ def main(
     print('Data imported. Processing...')
 
     bins = list(range(1, 100, 1))
-    minutes_step = 15
+    minutes_step = 30
     # weight of previous frames over new one. The inverse of the decay factor
     frame_persistence_factor = 4
 
@@ -107,7 +107,7 @@ def main(
     moving_average_frame = None
     quintiles = None
     filenames = []
-
+    fig = None
     for frame_idx, selected_minute in enumerate(
             [None] + all_minutes_starts):
         print(f'frame {frame_idx} of {len(all_minutes_starts)}')
@@ -155,11 +155,12 @@ def main(
               f'{np.average(place_map_draw,axis=(0,1))}/'
               f'{np.max(place_map_draw,axis=(0,1))}')
         my_dpi = 90
-        plt.figure(
-            figsize=(
-                place_map_draw.shape[1]/my_dpi,
-                place_map_draw.shape[0]/my_dpi),
-            dpi=my_dpi)
+        if fig is None:
+            fig = plt.figure(
+                    figsize=(
+                        place_map_draw.shape[1]/my_dpi,
+                        place_map_draw.shape[0]/my_dpi),
+                    dpi=my_dpi)
         if selected_minute is not None:
             plt.title(f'Location history for zone: {place_name} and'
                       f' hour {int(selected_minute / 60)}:'
@@ -202,7 +203,8 @@ def main(
             # for the total time, otherwise, calculating the
             # quintiles over the whole day, every frame would be dark
             quintiles = quintiles * len(all_minutes_starts)
-        plt.close('all')
+        # clear the figure, faster than deleting and recreating a new one
+        plt.clf()
     print('generating the GIF...')
     with imageio.get_writer(
         f'{place_name}.gif',
