@@ -20,7 +20,7 @@ Then, create a virtualenv, install the dependencies and run the script like this
     python3 -m pip install -r requirements.txt
     python3 process.py region_name 132700000 135500000 524300000 526000000 1500 /path/to/location/history/export.json /path/to/background/map/image.png
 
-You can use `python3 process.py --help` to get a description, but in short the numbers you see are the decimal coordinates multiplied by 10^7, the zoom level (1000 = 1 pixel per 10 meters).
+You can use `python3 process.py --help` to get a description, but in short the numbers you see are the decimal coordinates multiplied by 10^7, the zoom level (1000 = 1 pixel per 10 meters), the name to use for the title and the input files.
 
 It will create a global heatmap and one for every 15 minutes span after midnight. These images are then merged in an animated GIF and a webm video using the amazing [MoviePy](http://zulko.github.io/moviepy/) library.
 
