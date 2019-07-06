@@ -97,7 +97,7 @@ def main(
     print('Data imported. Processing...')
 
     bins = list(range(1, 100, 1))
-    minutes_step = 30
+    minutes_step = 15
     # weight of previous frames over new one. The inverse of the decay factor
     frame_persistence_factor = 4
 
