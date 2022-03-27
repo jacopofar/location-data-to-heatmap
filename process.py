@@ -11,6 +11,9 @@ from skimage.transform import resize
 from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
 
 
+def iso8601_to_epoch(iso_date: str):
+    return datetime.fromisoformat(iso_date[:19]).strftime('%s')
+
 def get_locations(
     location_data, x0, x1, y0, y1, scaling_factor,
     minutes_since_last_midnight_filter=None,
@@ -59,7 +62,7 @@ def get_locations(
     for index_location, loc in enumerate(location_data):
         processed += 1
         if minutes_since_last_midnight_filter is not None:
-            dt = datetime.fromtimestamp(int(loc['timestampMs'])/1000)
+            dt = datetime.fromtimestamp(int(iso8601_to_epoch(loc['timestamp']))/1000)
             sample_minutes = dt.hour * 60 + dt.minute
             if (sample_minutes < minutes_since_last_midnight_filter[0] or
                     sample_minutes > minutes_since_last_midnight_filter[1]):
@@ -73,8 +76,8 @@ def get_locations(
         else:
             if index_location + 1 < len(location_data):
                 place_map[y][x] += (
-                    (int(loc['timestampMs']) -
-                        int(location_data[index_location + 1]['timestampMs']))
+                    (int(iso8601_to_epoch(loc['timestamp'])) -
+                        int(iso8601_to_epoch(location_data[index_location + 1]['timestamp'])))
                     / (1000 * 60))
             else:
                 place_map[y][x] += 1
