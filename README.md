@@ -1,5 +1,15 @@
 # Location to heatmap
 
+# Archived
+This project is archived, Google Takeout now has a better format and there are better ways to generate this representation.
+
+Have a look at `location_to_geojson.py` (no dependencies needed) to generate GeoJSON files from your activities that can be loaded in QGIS or [geojson.io](https://geojson.io/#map=2/20.0/0.0) and many other tools.
+
+To generate raster representations like this I strongly recommend [Datashader](https://datashader.org/), it's powerful, easy to use and fast.
+
+This repository is now kept only for reference.
+## Old readme for reference
+
 This tool creates static and animated heatmaps of a given zone based on the data from Google location service.
 
 It can be useful to find parts of a city that you never visited and visualize your movement and habits.
